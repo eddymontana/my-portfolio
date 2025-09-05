@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+    <div class="container mx-auto p-8 max-w-4xl">
+        <header class="text-center mb-12">
+            <img class="mx-auto rounded-full w-32 h-32 object-cover border-4 border-white shadow-lg mb-4" src="https://placehold.co/400x400/2a3141/white?text=EA" alt="Profile Picture">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-2">Edidiong Aaron</h1>
+            <p class="text-lg text-gray-600">AI/ML Engineer & Data Scientist | Prompt Engineer | Flutter Dev</p>
+        </header>
+
+        <section id="about" class="mb-12">
+            <h2 class="text-3xl font-bold mb-4">About Me</h2>
+            <p class="text-gray-700 leading-relaxed">As a skilled Data Scientist and AI/ML Engineer, I have a passion for creating intelligent systems that solve real-world problems. My expertise includes Prompt Engineering, Flutter development, and workflow automation with Make.com.</p>
+        </section>
+
+        <section id="projects" class="mb-12">
+            <h2 class="text-3xl font-bold mb-4">Projects</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-xl font-semibold mb-2">AI-Powered Financial Optimizer</h3>
+                    <p class="text-gray-600 mb-4">A powerful tool that uses AI to analyze market data and optimize investment portfolios.</p>
+                    <a href="https://github.com/eddymontana/financial-optimizer" class="text-indigo-600 font-medium hover:underline">View Project &rarr;</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-xl font-semibold mb-2">Intelligent Chatbot with Prompt Engineering</h3>
+                    <p class="text-gray-600 mb-4">A custom chatbot that leverages advanced prompt engineering to generate high-quality content and automate tasks.</p>
+                    <a href="https://github.com/eddymontana/intelligent-chatbot" class="text-indigo-600 font-medium hover:underline">View Project &rarr;</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section id="faq" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
+            <div class="bg-white rounded-lg shadow-md border border-gray-200 divide-y divide-gray-200">
+                <details class="p-6">
+                    <summary class="flex justify-between items-center text-lg font-semibold cursor-pointer text-gray-800 hover:text-indigo-600 transition-colors duration-200">
+                        What are your areas of expertise?
+                        <span class="text-xl leading-none">▼</span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">I specialize in AI/ML Engineering, Data Science, and Prompt Engineering. I also have strong skills in Flutter development and workflow automation with Make.com.</p>
+                </details>
+                
+                <details class="p-6">
+                    <summary class="flex justify-between items-center text-lg font-semibold cursor-pointer text-gray-800 hover:text-indigo-600 transition-colors duration-200">
+                        How do we get started on a project?
+                        <span class="text-xl leading-none">▼</span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">All projects begin with a detailed consultation to understand your specific needs. Please reach out to me through my Upwork profile to discuss your project requirements and to receive a custom quote.</p>
+                </details>
+                
+                <details class="p-6">
+                    <summary class="flex justify-between items-center text-lg font-semibold cursor-pointer text-gray-800 hover:text-indigo-600 transition-colors duration-200">
+                        Do you work with a specific technology stack?
+                        <span class="text-xl leading-none">▼</span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">I am flexible with technology stacks and can adapt to your needs. My primary tools include Python (for data science and ML), and I have experience with a variety of frameworks and libraries.</p>
+                </details>
+            </div>
+        </section>
+
+        <section id="contact" class="text-center mt-12">
+            <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
+            <p class="text-gray-700 leading-relaxed mb-6">
+                I am actively seeking new freelance opportunities. You can view my work and hire me on my Upwork profile.
+            </p>
+            <a href="https://www.upwork.com/freelancers/~0123456789" target="_blank" class="inline-block bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-indigo-700 transition duration-300">Hire Me on Upwork</a>
+        </section>
+    </div>
+</body>
+</html>
