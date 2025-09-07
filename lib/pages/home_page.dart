@@ -3,18 +3,19 @@ import 'package:my_portfolio/about/about_desktop.dart';
 import 'package:my_portfolio/about/about_mobile.dart';
 import 'package:my_portfolio/constants/colors.dart';
 import 'package:my_portfolio/constants/size.dart';
-import 'package:my_portfolio/contact.dart';
+import 'package:my_portfolio/contact.dart'; // Add this if ContactSection is defined here
 import 'package:my_portfolio/footer/footer_desktop.dart';
 import 'package:my_portfolio/footer/footer_mobile.dart';
 import 'package:my_portfolio/projects/projects_desktop.dart';
 import 'package:my_portfolio/projects/projects_mobile.dart';
+import 'package:my_portfolio/utils/navigation_utils.dart'; // Import the new utility file
 import 'package:my_portfolio/widgets/drawer_mobile.dart';
 import 'package:my_portfolio/widgets/header_desktop.dart';
 import 'package:my_portfolio/widgets/header_mobile.dart';
 import 'package:my_portfolio/widgets/main_desktop.dart';
 import 'package:my_portfolio/widgets/main_mobile.dart';
 import 'package:my_portfolio/widgets/skills_desktop.dart';
-import 'package:my_portfolio/widgets/skills_mobile.dart';
+import 'package:my_portfolio/widgets/skills_mobile.dart'; // Import the new contact form file
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -33,18 +34,6 @@ class _HomePageState extends State<HomePage> {
   final projectsSectionKey = GlobalKey();
   final contactSectionKey = GlobalKey();
   final footerSectionKey = GlobalKey();
-
-  void scrollToSection(GlobalKey key) {
-    final context = key.currentContext;
-    if (context != null) {
-      Scrollable.ensureVisible(
-        context,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-        alignment: 0.0,
-      );
-    }
-  }
 
   @override
   void dispose() {
@@ -112,9 +101,12 @@ class _HomePageState extends State<HomePage> {
                 else
                   ProjectsMobile(key: projectsSectionKey),
 
-                // Contact Section
-                ContactSection(key: contactSectionKey),
+                // New Contact Form Section
+                ContactForm(),
 
+                ContactSection(
+                  key: contactSectionKey,
+                ), // Ensure ContactSection is imported and defined
                 // Footer
                 if (constraints.maxWidth >= dMedDesktopWidth)
                   FooterDesktop(key: footerSectionKey)
@@ -125,6 +117,20 @@ class _HomePageState extends State<HomePage> {
           ),
         );
       },
+    );
+  }
+}
+
+class ContactSection extends StatelessWidget {
+  final Key? key;
+  const ContactSection({this.key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Replace with your actual contact section UI
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      child: Text('Contact Section'),
     );
   }
 }

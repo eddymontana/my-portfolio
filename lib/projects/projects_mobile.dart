@@ -1,7 +1,6 @@
-// lib/sections/projects/projects_mobile.dart
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/widgets/project_card.dart';
-import 'package:my_portfolio/constants/projects_data.dart'; // NEW
+import 'package:my_portfolio/constants/projects_data.dart';
 
 class ProjectsMobile extends StatelessWidget {
   const ProjectsMobile({super.key});
@@ -23,7 +22,7 @@ class ProjectsMobile extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10), // Reduced spacing
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -31,7 +30,9 @@ class ProjectsMobile extends StatelessWidget {
             itemBuilder: (context, index) {
               final project = myProjects[index];
               return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                ), // Reduced padding
                 child: ProjectCard(
                   projectTitle: project.name,
                   projectDescription: project.description,

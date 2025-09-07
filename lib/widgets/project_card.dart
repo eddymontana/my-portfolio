@@ -1,101 +1,109 @@
-// lib/widgets/project_card.dart
-
 import 'package:flutter/material.dart';
-import 'package:my_portfolio/constants/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProjectCard extends StatefulWidget {
-  const ProjectCard({
-    super.key,
-    required this.projectTitle,
-    required this.projectDescription,
-    required this.imagePath,
-    required this.projectLink,
-  });
-
   final String projectTitle;
   final String projectDescription;
   final String imagePath;
   final String projectLink;
+  final String? technologies;
+
+  const ProjectCard({
+    Key? key,
+    required this.projectTitle,
+    required this.projectDescription,
+    required this.imagePath,
+    required this.projectLink,
+    this.technologies,
+  }) : super(key: key);
 
   @override
   State<ProjectCard> createState() => _ProjectCardState();
 }
 
 class _ProjectCardState extends State<ProjectCard> {
-  bool isHovered = false;
+  bool _isHovering = false;
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (event) {
-        setState(() {
-          isHovered = true;
-        });
-      },
-      onExit: (event) {
-        setState(() {
-          isHovered = false;
-        });
-      },
-      child: InkWell(
-        onTap: () async {
-          if (!await launchUrl(Uri.parse(widget.projectLink))) {
-            throw Exception('Could not launch ${widget.projectLink}');
-          }
-        },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          transform: Matrix4.identity()..scale(isHovered ? 1.05 : 1.0),
-          transformAlignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: CustomColors.bgLight2,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: isHovered
-                ? [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      blurRadius: 10,
-                      offset: const Offset(0, 5),
-                    ),
-                  ]
-                : [],
+      onEnter: (event) => setState(() => _isHovering = true),
+      onExit: (event) => setState(() => _isHovering = false),
+      child: AnimatedScale(
+        scale: _isHovering ? 1.05 : 1.0,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
+        child: Card(
+          elevation: _isHovering ? 12 : 6,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
           ),
+          clipBehavior: Clip.antiAlias,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(10),
-                ),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
                 child: Image.asset(
                   widget.imagePath,
                   fit: BoxFit.cover,
-                  height: 150,
+                  width: double.infinity,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(12.0), // Reduced padding
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       widget.projectTitle,
-                      style: const TextStyle(
-                        fontSize: 20,
+                      style: TextStyle(
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: CustomColors.whitePrimary,
+                        color: Colors.blueGrey[800],
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 6), // Reduced spacing
                     Text(
                       widget.projectDescription,
                       style: const TextStyle(
-                        fontSize: 14,
-                        color: CustomColors.whiteSecondary,
+                        fontSize: 12,
+                        color: Colors.black54,
                       ),
-                      maxLines: 2,
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 10), // Reduced spacing
+                    if (widget.technologies != null)
+                      Wrap(
+                        spacing: 4.0,
+                        runSpacing: 2.0,
+                        children: widget.technologies!.split(', ').map((tech) {
+                          return Chip(
+                            label: Text(
+                              tech,
+                              style: const TextStyle(fontSize: 10),
+                            ),
+                            backgroundColor: Colors.blueGrey[50],
+                          );
+                        }).toList(),
+                      ),
+                    const SizedBox(height: 10), // Reduced spacing
+                    OutlinedButton.icon(
+                      onPressed: () => _launchURL(widget.projectLink),
+                      icon: const Icon(Icons.code, size: 16),
+                      label: const Text('View on GitHub'),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.blueGrey[800],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 8,
+                        ), // Reduced padding
+                      ),
                     ),
                   ],
                 ),
@@ -105,5 +113,14 @@ class _ProjectCardState extends State<ProjectCard> {
         ),
       ),
     );
+  }
+
+  void _launchURL(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      debugPrint('Could not launch $url');
+    }
   }
 }

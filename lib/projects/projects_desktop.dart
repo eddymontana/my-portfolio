@@ -1,7 +1,6 @@
-// lib/sections/projects/projects_desktop.dart
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/widgets/project_card.dart';
-import 'package:my_portfolio/constants/projects_data.dart'; // NEW
+import 'package:my_portfolio/constants/projects_data.dart';
 
 class ProjectsDesktop extends StatelessWidget {
   const ProjectsDesktop({super.key});
@@ -31,7 +30,8 @@ class ProjectsDesktop extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: 15,
               mainAxisSpacing: 15,
-              childAspectRatio: 1.2,
+              childAspectRatio:
+                  0.8, // Adjusted for a more compact, vertical look
             ),
             itemBuilder: (context, index) {
               final project = myProjects[index];
